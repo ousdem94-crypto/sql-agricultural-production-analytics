@@ -1,45 +1,45 @@
-# Agricultural Production Analytics with SQL
+# Analyse de la production agricole et de l’élevage avec SQL
 
-## Project status
+## État du projet
 
-**In progress — Phase 1: Audit & Diagnostic**
+**En cours — Phase 1 : Audit et diagnostic**
 
-This project uses FAOSTAT crop and livestock production data, with an initial analytical focus on Mali. The work is being developed incrementally: each audit step is documented and validated before moving to the next phase.
+Ce projet utilise les données FAOSTAT sur les cultures et les produits de l’élevage, avec un premier périmètre d’analyse centré sur le Mali. Le travail avance progressivement : chaque étape de l’audit est documentée et validée avant de passer à la suivante.
 
-## Business objective
+## Objectif métier
 
-Understand the structure, coverage, and reliability of the FAOSTAT agricultural and livestock dataset before conducting country-focused analysis for Mali.
+Comprendre la structure, la couverture et la fiabilité du jeu de données FAOSTAT sur la production agricole et animale avant de réaliser des analyses métier ciblées sur le Mali.
 
-## Data source and structure
+## Source et structure des données
 
-- Source file: `Production_Crops_Livestock_E_All_Data_NOFLAG.csv`
-- Database/table currently used in DBeaver/MySQL: `production_crops_livestock_e_all_data_noflag`
-- Descriptive dimensions include `Area`, `Item`, `Element`, and `Unit`, with annual columns from `Y1961` to `Y2023`.
+- Fichier source : `Production_Crops_Livestock_E_All_Data_NOFLAG.csv`
+- Base/table actuellement utilisée dans DBeaver et MySQL : `production_crops_livestock_e_all_data_noflag`
+- Les dimensions descriptives comprennent `Area`, `Item`, `Element` et `Unit`, ainsi que des colonnes annuelles de `Y1961` à `Y2023`.
 
-The source CSV is not included in this repository at this stage.
+Le fichier CSV source n’est pas inclus dans ce dépôt pour le moment.
 
-## Work completed so far
+## Travaux réalisés à ce jour
 
-Initial checks performed in DBeaver:
+Premiers contrôles effectués dans DBeaver :
 
-| Control | Result |
+| Contrôle | Résultat |
 |---|---:|
-| Total rows in the table | 75,000 |
-| Rows for Mali | 317 |
-| Distinct items across the complete table | 302 |
-| Distinct items represented for Mali | 132 |
+| Nombre total de lignes dans la table | 75 000 |
+| Nombre de lignes concernant le Mali | 317 |
+| Nombre de produits distincts dans l’ensemble de la table | 302 |
+| Nombre de produits distincts pour le Mali | 132 |
 
-A first visual inspection identified `Area harvested`, `Yield`, `Production`, and `Stocks` among the `Element` categories, with different units. Some annual fields contain `NULL` values. These observations will be investigated during the audit; they are not yet classified as errors.
+Une première inspection visuelle a permis d’identifier notamment les catégories suivantes dans `Element` : `Area harvested`, `Yield`, `Production` et `Stocks`, avec différentes unités. Certaines colonnes annuelles contiennent des valeurs `NULL`. Ces observations seront examinées pendant l’audit ; elles ne sont pas encore considérées comme des erreurs.
 
-## Methodology
+## Méthode de travail
 
-1. Audit and diagnose the raw data.
-2. Review data quality, coverage, missing values, and logical duplicates.
-3. Check the plausibility of indicator values against the actual `Element` and `Unit` categories present.
-4. After the audit is complete, define and perform business-focused analyses for Mali.
-5. Document validated queries, findings, and limitations as the project progresses.
+1. Auditer et diagnostiquer les données brutes.
+2. Examiner la qualité des données, la couverture, les valeurs manquantes et les doublons logiques.
+3. Vérifier la plausibilité des valeurs des indicateurs en tenant compte des catégories `Element` et des unités `Unit` réellement présentes.
+4. Une fois l’audit terminé, définir et réaliser des analyses métier centrées sur le Mali.
+5. Documenter progressivement les requêtes, les résultats validés et les limites de l’analyse.
 
-## Repository structure
+## Structure du dépôt
 
 ```text
 sql-agricultural-production-analytics/
@@ -48,40 +48,40 @@ sql-agricultural-production-analytics/
     └── 01_audit_diagnostic.sql
 ```
 
-The SQL script will be expanded incrementally as audit sections are completed and reviewed.
+Le script SQL sera complété progressivement, au fur et à mesure que les sections de l’audit seront réalisées et revues ensemble.
 
-## Current audit plan
+## Plan actuel de l’audit
 
-1. Table identification and structure
-2. Row counts, including Mali
-3. Inspection of initial observations
-4. Distinct items
-5. Distinct areas
-6. Distinct area codes
-7. Distinct M49 area codes
-8. Distinct item codes
-9. Distinct CPC item codes
-10. Distinct element codes
-11. Distinct elements
-12. Distinct units
-13. Time-period coverage
-14. Number of distinct years
-15. Logical duplicate checks
-16. NULL-value checks
-17. Empty-value checks
-18. Minimum and maximum harvested-area values
-19. Minimum and maximum yield values
-20. Minimum and maximum production values
-21. Minimum and maximum stock values
+1. Identification et structure de la table
+2. Contrôle du nombre de lignes, dont celles du Mali
+3. Inspection des premières observations
+4. Nombre de produits distincts (`Item`)
+5. Nombre de zones distinctes (`Area`)
+6. Nombre de codes de zone distincts (`Area Code`)
+7. Nombre de codes M49 de zone distincts (`Area Code (M49)`)
+8. Nombre de codes de produits distincts (`Item Code`)
+9. Nombre de codes CPC de produits distincts (`Item Code (CPC)`)
+10. Nombre de codes d’éléments distincts (`Element Code`)
+11. Nombre d’éléments distincts (`Element`)
+12. Nombre d’unités distinctes (`Unit`)
+13. Période couverte par les données
+14. Nombre d’années distinctes
+15. Recherche des doublons logiques
+16. Recherche des valeurs `NULL`
+17. Recherche des valeurs vides
+18. Contrôle des valeurs minimales et maximales des superficies récoltées
+19. Contrôle des valeurs minimales et maximales des rendements
+20. Contrôle des valeurs minimales et maximales des productions
+21. Contrôle des valeurs minimales et maximales des stocks
 
-Some checks may be refined after confirming the exact indicator categories and units in the imported table. The project remains in the audit phase; exploratory data analysis has not started.
+Certains contrôles pourront être ajustés après confirmation des catégories d’indicateurs et des unités présentes dans la table importée. Le projet reste dans la phase d’audit et de diagnostic : l’analyse exploratoire des données (EDA) n’a pas encore commencé.
 
-## Tools
+## Outils utilisés
 
 - MySQL
 - DBeaver
 - GitHub
 
-## Notes
+## Remarques
 
-Results recorded here reflect the current local database and the checks performed so far. They will be updated if later validation changes the interpretation or figures.
+Les résultats présentés ici correspondent à la base de données locale et aux contrôles effectués jusqu’à présent. Ils seront mis à jour si des vérifications ultérieures modifient les chiffres ou leur interprétation.
